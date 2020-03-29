@@ -59,9 +59,21 @@ CREATE TABLE "CHARGING_PLACE"
         CONSTRAINT "charging_idPlace_PK" PRIMARY KEY,
     "xCoordinate" INTEGER DEFAULT 0,
     "yCoordinate" INTEGER DEFAULT 0,
-    "measurementOfSeekage" INTEGER DEFAULT 0,
+    "rateOfSeekage" INTEGER DEFAULT 0,
     "idElement" CHARACTER VARYING(100)
         CONSTRAINT "charging_idElement_U" UNIQUE,
 
     CONSTRAINT "charging_idElement_FK" FOREIGN KEY("idElement") REFERENCES ELEMENT ("idElement") ON DELETE CASCADE -- Prosakuje
 );
+
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('odwyechuk56', 'nulla', 'Goldenrod');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('izbuyhcbg64', 'sagittis', 'Violet');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('kjifefork14', 'dis', 'Pink');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('rusgwalej98', 'in', 'Maroon');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('pikehqcwv40', 'ac', 'Mauv');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('wcvjakwqy05', 'feugiat', 'Indigo');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('rlksxtoxe97', 'luctus', 'Fuscia');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('griuyxtdr65', 'lorem', 'Puce');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('afxnjuerz76', 'semper', 'Maroon');
+insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('lnbbjxydd88', 'leo', 'Violet');
+
