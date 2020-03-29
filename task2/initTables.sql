@@ -241,3 +241,24 @@ insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana
 insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level") values ('c13827fa-2ec2-40d9-8e60-a26eab1a6d32', 'Surely it won’t notice if I take Theria the Sly, last words', 'Lithium', 'MAGICIAN', '97', '13');
 insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type",  "Age" , "Ability of magic" ) values ('3b91c534-5a83-47b1-9c40-61bf3450218a', '﻿By the time their enemies noticed the sea’s changing mood, the Vodalians had often shifted formation and were ready to attack.', 'EPINEPHRINE', 'ELF', '2', '49');
 insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level" ) values ('bab2f53b-2339-445d-b28b-5bff72b109ef', 'The earth cannot hold that which magic commands.', 'losartan potassium', 'MAGICIAN', '0', '7');
+
+
+
+
+insert into GRIMOIRE ("ID_GRIMOAR", "State_of_charged_magic", "Name_of_grimoire","idElement") values ('8d14e285-a7e6-4c4d-8ab4-5528c7ba6e61', '2800', 'Intéressant','elem45703');
+insert into GRIMOIRE ("ID_GRIMOAR", "State_of_charged_magic", "Name_of_grimoire","idElement") values ('7f2d4f24-15f2-4cc8-8bfe-4cbe85780a86', '9391', 'Stévina','elem70284');
+insert into GRIMOIRE ("ID_GRIMOAR", "State_of_charged_magic", "Name_of_grimoire","idElement") values ('d715a9f6-180d-41a0-8f4b-eae109ddaf36', '9436', 'Tán','elem55873');
+insert into GRIMOIRE ("ID_GRIMOAR", "State_of_charged_magic", "Name_of_grimoire","idElement") values ('2c2d59b3-56cb-4c9a-be9d-c36ce6c409ea', '257', 'Kévina','elem01918');
+
+
+
+
+
+
+
+
+
+
+
+
+
