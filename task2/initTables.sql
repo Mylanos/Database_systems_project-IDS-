@@ -13,12 +13,13 @@ CREATE TABLE "SPELL"
     "idSpell" CHARACTER VARYING(100)
         CONSTRAINT "spell_idSpell_PK" PRIMARY KEY,
     "spellName" CHARACTER VARYING(100),
-    "difficultyOfCasting" CHARACTER VARYING(100),
-    "type" CHARACTER VARYING(100),
-    "power" INTEGER DEFAULT 0 CHECK ( "power" >= 0 ),
+    "difficultyOfCasting" CHARACTER VARYING(100) CHECK ( "difficultyOfCasting" = 'HARD' OR
+                                                         "difficultyOfCasting" = 'MEDIUM' OR
+                                                         "difficultyOfCasting" = 'EASY'),
+    "type" CHARACTER VARYING(100) NOT NULL ,
+    "strength" INTEGER DEFAULT 0 CHECK ( "strength" >= 0 AND "strength" <= 100),
     "mainElement" CHARACTER VARYING(100)
-        CONSTRAINT "spell_idElement_NN" NOT NULL
-        CONSTRAINT "spell_idElement_U" UNIQUE,
+        CONSTRAINT "spell_idElement_NN" NOT NULL,
 
     CONSTRAINT "spell_idElement_FK" FOREIGN KEY("mainElement") REFERENCES ELEMENT ("idElement") ON DELETE CASCADE -- Ma hlavny
 );
@@ -38,8 +39,7 @@ CREATE TABLE "SPECIALIZATION"
 (
     "idSpecialization" CHARACTER VARYING(100)
         CONSTRAINT "specializ_idSpecialization_PK" PRIMARY KEY,
-    "Type" CHARACTER VARYING(100)
-        CONSTRAINT "specializType_NN" NOT NULL
+    "type" CHARACTER VARYING(100) NOT NULL
 );
 
 -- Element moze mat viac
@@ -59,9 +59,9 @@ CREATE TABLE "CHARGING_PLACE"
         CONSTRAINT "charging_idPlace_PK" PRIMARY KEY,
     "xCoordinate" INTEGER DEFAULT 0,
     "yCoordinate" INTEGER DEFAULT 0,
-    "measurementOfSeekage" INTEGER DEFAULT 0,
+    "measurementOfSeekage" DECIMAL(3,2) DEFAULT 0,
     "idElement" CHARACTER VARYING(100)
-        CONSTRAINT "charging_idElement_U" UNIQUE,
+        CONSTRAINT "charging_idElement_NN" NOT NULL,
 
     CONSTRAINT "charging_idElement_FK" FOREIGN KEY("idElement") REFERENCES ELEMENT ("idElement") ON DELETE CASCADE -- Prosakuje
 );
