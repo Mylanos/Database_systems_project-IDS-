@@ -76,9 +76,9 @@ Create Table "GRIMOIRE"(
     );
 -- Vytvorit id rodne cislo
 Create Table "MAGICAL_BEING"(
-        "ID_MAGICAL_BEING" CHARACTER VARYING(100) CONSTRAINT "ID_Magical_Being_PK" PRIMARY KEY,
+        "ID_MAGICAL_BEING" CHARACTER VARYING(200) CONSTRAINT "ID_Magical_Being_PK" PRIMARY KEY,
         "Story"CHARACTER VARYING(200)  constraint "MAGICAL_BEING_Story_NN" NOT NULL,
-        "Name" CHARACTER VARYING(100) CONSTRAINT "MAGICAL_BEING_Name_NN" NOT NULL,
+        "Name" CHARACTER VARYING(200) CONSTRAINT "MAGICAL_BEING_Name_NN" NOT NULL,
         "Type" CHARACTER VARYING(100) CONSTRAINT "MAGICAL_BEING_Type_NN" CHECK ( "Type"='ELF' OR "Type"='MAGICIAN'),
         "Mana size" integer CHECK ("Mana size">= 0)  ,
         "Level" integer CHECK ( "Level" >= 0) ,
@@ -231,3 +231,13 @@ insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeek
 insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place36930', 223, 437, 0.79, 'elem11780');
 insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place09959', 825, 261, 0.96, 'elem66085');
 insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place60126', 3, 25, 0.64, 'elem11780');
+
+
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type" , "Age" , "Ability of magic" ) values ('bd41658c-15d4-4a6f-bd8c-330cdfcde63d', 'Whether we like it or not, our arrival has altered the landscape. —Malcolm, navigator of the Belligerent', 'Octinoxate and Oxybenzone', 'ELF', '959', '9821');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level") values ('78b2c328-f6d2-434b-a44b-637ae95e4684', 'I can tell you what you wish to know. But first, there is the matter of my fee', 'Malathion', 'MAGICIAN', '06968', '0588');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type",  "Age" , "Ability of magic" ) values ('5a88d488-9211-4bac-b129-f1a030d084a3', 'Beware the generosity of demons', 'ALUMINUM CHLOROHYDRATE', 'ELF', '7', '87');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type",  "Age" , "Ability of magic" ) values ('340ea254-09af-4afb-852c-6da0b1fe4af5', 'Potions! Mana potions, health potions, energy potions—get your potions here!', 'Triclosan', 'ELF', '9', '2684');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level") values ('e3f92c06-0f66-43d7-9f5d-0d7d324f2266', 'They danced like puppets to a tune only Yawgmoth could hear.', 'OCTINOXlATE, OCTISALATE, OXYBENZONE, TITANIUM DIOXIDE', 'MAGICIAN', '70227', '634');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level") values ('c13827fa-2ec2-40d9-8e60-a26eab1a6d32', 'Surely it won’t notice if I take Theria the Sly, last words', 'Lithium', 'MAGICIAN', '97', '13');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type",  "Age" , "Ability of magic" ) values ('3b91c534-5a83-47b1-9c40-61bf3450218a', '﻿By the time their enemies noticed the sea’s changing mood, the Vodalians had often shifted formation and were ready to attack.', 'EPINEPHRINE', 'ELF', '2', '49');
+insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level" ) values ('bab2f53b-2339-445d-b28b-5bff72b109ef', 'The earth cannot hold that which magic commands.', 'losartan potassium', 'MAGICIAN', '0', '7');
