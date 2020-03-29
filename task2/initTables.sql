@@ -1,3 +1,4 @@
+--Predstavuje tabuľku element
 CREATE TABLE "ELEMENT"
 (
     "idElement" CHARACTER VARYING(100)
@@ -8,6 +9,7 @@ CREATE TABLE "ELEMENT"
         CONSTRAINT "colorMagic_NN" NOT NULL
 );
 
+--Predstavuje tabuľku kúzlo s tým že stĺpec "mainElement" predstavuje vzťah "Má hlavný" medzi Elementom a kúzlom kde sa ukladá hlavný element kúzla (Nenullový)
 CREATE TABLE "SPELL"
 (
     "idSpell" CHARACTER VARYING(100)
@@ -16,7 +18,8 @@ CREATE TABLE "SPELL"
     "difficultyOfCasting" CHARACTER VARYING(100) CHECK ( "difficultyOfCasting" = 'HARD' OR
                                                          "difficultyOfCasting" = 'MEDIUM' OR
                                                          "difficultyOfCasting" = 'EASY'),
-    "type" CHARACTER VARYING(100) NOT NULL ,
+    "type" CHARACTER VARYING(100)
+        CONSTRAINT "spell_type_NN" NOT NULL,
     "strength" INTEGER DEFAULT 0 CHECK ( "strength" >= 0 AND "strength" <= 100),
     "mainElement" CHARACTER VARYING(100)
         CONSTRAINT "spell_idElement_NN" NOT NULL,
@@ -24,7 +27,7 @@ CREATE TABLE "SPELL"
     CONSTRAINT "spell_idElement_FK" FOREIGN KEY("mainElement") REFERENCES ELEMENT ("idElement") ON DELETE CASCADE -- Ma hlavny
 );
 
--- Moze mat vedlajsi
+-- Tabuľka predstavuje vzťah "Môže mať vedlajší" medzi Elementom a kúzlom. Vytvorili sme ju ako novú tabuľku pretože to je vzťah many to many.
 CREATE TABLE "SECONDARY_ELEMENTS"
 (
     "idSpell" CHARACTER VARYING(100),
@@ -35,6 +38,7 @@ CREATE TABLE "SECONDARY_ELEMENTS"
     CONSTRAINT "secondaryElements_idElement_FK" FOREIGN KEY("idElement") REFERENCES "ELEMENT"("idElement") ON DELETE CASCADE
 );
 
+--Tabuľka predstavujúca entitnú množinu "Specializace"
 CREATE TABLE "SPECIALIZATION"
 (
     "idSpecialization" CHARACTER VARYING(100)
@@ -42,17 +46,19 @@ CREATE TABLE "SPECIALIZATION"
     "type" CHARACTER VARYING(100) NOT NULL
 );
 
--- Element moze mat viac
+-- Predstavuje vzťah "Element moze mat viac", znova vzťah many to many s tým že jednotlivé stĺpce nemôžu byť NULL.
 CREATE TABLE "ELEMENT_SPECIALIZATION"
 (
-    "idSpecialization" CHARACTER VARYING(100),
-    "idElement" CHARACTER VARYING(100),
+    "idSpecialization" CHARACTER VARYING(100) NOT NULL,
+    "idElement" CHARACTER VARYING(100) NOT NULL,
 
     CONSTRAINT "elemSpecializ_idSpecialization_idElement_PK" PRIMARY KEY("idSpecialization", "idElement"),
     CONSTRAINT "elemSpecializ_idSpecialization_FK" FOREIGN KEY("idSpecialization") REFERENCES "SPECIALIZATION"("idSpecialization") ON DELETE CASCADE,
     CONSTRAINT "elemSpecializ_idElement_FK" FOREIGN KEY("idElement") REFERENCES "ELEMENT"("idElement") ON DELETE CASCADE
 );
 
+-- Predstavuje entitnú množinu "Dobíjecí místo" a zároveň vzťah "Prosakuje", je to vzťah 0/1 to many teda postačí ak ho modelujeme ako nový stĺpec v
+-- entitnej množine "Dobíjecí místo", ktoré môže byť aj NULL
 CREATE TABLE "CHARGING_PLACE"
 (
     "idPlace" CHARACTER VARYING(100)
@@ -60,8 +66,7 @@ CREATE TABLE "CHARGING_PLACE"
     "xCoordinate" INTEGER DEFAULT 0,
     "yCoordinate" INTEGER DEFAULT 0,
     "rateOfSeekage" DECIMAL(3,2) DEFAULT 0,
-    "idElement" CHARACTER VARYING(100)
-        CONSTRAINT "charging_idElement_NN" NOT NULL,
+    "idElement" CHARACTER VARYING(100),
 
     CONSTRAINT "charging_idElement_FK" FOREIGN KEY("idElement") REFERENCES ELEMENT ("idElement") ON DELETE CASCADE -- Prosakuje
 );
@@ -99,7 +104,6 @@ CREATE TABLE "MAGICAL_BEING_CAN_HAVE"
     CONSTRAINT "MAGICAL_BEING_CAN_HAVE_ID_MAGICAL_BEING_FK" FOREIGN KEY("ID_MAGICAL_BEING") REFERENCES "MAGICAL_BEING" ("ID_MAGICAL_BEING") ON DELETE CASCADE,
     CONSTRAINT "MAGICAL_BEING_CAN_HAVE_ID_GRIMOAR_FK" FOREIGN KEY("ID_GRIMOAR") REFERENCES "GRIMOIRE"("ID_GRIMOAR") ON DELETE CASCADE
 );
-
 
 CREATE TABLE "MAGICAL_BEING_HAD"
 (
@@ -175,6 +179,8 @@ CONSTRAINT "15_idSpell_FK" FOREIGN KEY ("15_idSpell") REFERENCES "SPELL" ("idSpe
 
 );
 
+-- Predstavuje entitnú množinu "Kliatba", ktorá dedí z "Kouzla" a zároveň predstavuje vzťah many to many "bola zoslana na"
+-- medzi entitami kliatba a magicka bytost
 CREATE TABLE "CURSED_BEING"(
         "duration" INTEGER DEFAULT 0 CHECK ( "duration" >= 0 ),
         "ID_MAGICAL_BEING" CHARACTER VARYING(100),
@@ -185,9 +191,11 @@ CREATE TABLE "CURSED_BEING"(
         CONSTRAINT "CURSED_BEING_ID_SPELL_FK" FOREIGN KEY("idSpell") REFERENCES "SPELL"("idSpell") ON DELETE CASCADE
 );
 
+-- Predstavuje many to many vzťah "Pozitívna synergia", navrhujeme znova ako vlastnú tabuľku kde zároveň ukladáme pre každý záznam limit.
+-- nie každá magická bytosť môže mať pozitivnu synergiu ale keď už má element nemôže byť nula(Preto idElement je NOT NULL)
 CREATE TABLE POSITIVE_SYNERGY(
         "limit" INTEGER DEFAULT 0 CHECK ( "limit" >= 0 ),
-        "ID_MAGICAL_BEING" CHARACTER VARYING(100) ,
+        "ID_MAGICAL_BEING" CHARACTER VARYING(100),
         "idElement" CHARACTER VARYING(100) NOT NULL,
 
         CONSTRAINT "POSITIVE_SYNERGY_ID_MAGICAL_BEING_ID_GRIMOAR_PK" PRIMARY KEY("ID_MAGICAL_BEING", "idElement"),
