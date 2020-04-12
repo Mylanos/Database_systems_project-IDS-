@@ -1,8 +1,7 @@
 -- Požadavek: dotazy s klauzulí GROUP BY a agregační funkcí
 -- Koľko kúziel majú jednotlivé elementy s farbou magie 'Violet'.
 -- Evidujte id elementu, nazov elementu, barvu_elementu, počet kuziel
-
-SELECT "ELEMENT"."idElement" el, "ELEMENT"."elementName", spell_main_elements.count
+SELECT "ELEMENT"."idElement" el, "ELEMENT"."elementName", spell_main_elements.count num_of_spells
 FROM "ELEMENT",
     (SELECT "SPELL"."mainElement" element, COUNT("SPELL"."mainElement") count
         FROM "SPELL"
