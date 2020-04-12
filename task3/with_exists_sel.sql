@@ -5,4 +5,4 @@ Select * From
 exists (
 Select * from POSITIVE_SYNERGY Where "limit" > 50) ) magical_being
 inner join ( Select * from POSITIVE_SYNERGY Where "limit" > 50) positive
-ON  positive.ID_MAGICAL_BEING = magical_being.ID_MAGICAL_BEING
+ON  positive.ID_MAGICAL_BEING = magical_being.ID_MAGICAL_BEING;
