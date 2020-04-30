@@ -1,3 +1,3 @@
--- vytvoření alespoň dvou netriviálních uložených procedur vč. jejich předvedení, ve kterých se musí (dohromady)
--- vyskytovat alespoň jednou kurzor, ošetření výjimek a použití proměnné s datovým typem odkazujícím se na řádek či
--- typ sloupce tabulky (table_name.column_name%TYPE nebo table_name%ROWTYPE),
+-- vytvoření alespoň dvou netriviálních databázových triggerů vč. jejich předvedení, z toho právě jeden trigger pro
+-- automatické generování hotnot primárního klíče nějaké tabulky ze sekvence (např. pokud bude při vkládání záznamů
+-- do dané tabulky hodnota primárního klíče nedefinována, tj. NULL),
