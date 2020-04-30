@@ -334,8 +334,8 @@ insert into POSITIVE_SYNERGY("limit", "ID_MAGICAL_BEING", "idElement") values (1
 insert into POSITIVE_SYNERGY("limit", "ID_MAGICAL_BEING", "idElement") values (50, 'bab2f53b-2339-445d-b28b-5bff72b109ef', 'elem55873');
 insert into POSITIVE_SYNERGY("limit", "ID_MAGICAL_BEING", "idElement") values (50, '3b91c534-5a83-47b1-9c40-61bf3450218a', 'elem06711');
 
-
-insert into CURSED_BEING ("duration", ID_MAGICAL_BEING, "idSpell") VALUES (420, '5a88d488-9211-4bac-b129-f1a030d084a3', 'spell44205')
+insert into CURSED_BEING ("duration", ID_MAGICAL_BEING, "idSpell") VALUES (420, '5a88d488-9211-4bac-b129-f1a030d084a3', 'spell44205');
+insert into CURSED_BEING ("duration", ID_MAGICAL_BEING, "idSpell") VALUES (720, 'c13827fa-2ec2-40d9-8e60-a26eab1a6d32', 'spell74840');
 
 
 ---------------------------------- SELECTS ----------------------------------
