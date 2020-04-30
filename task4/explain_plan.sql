@@ -8,3 +8,28 @@
 -- explicitní vytvoření alespoň jednoho indexu tak, aby pomohl optimalizovat zpracování dotazů, přičemž musí být uveden
 -- také příslušný dotaz, na který má index vliv, a v dokumentaci popsán způsob využití indexu v tomto dotazy (toto lze
 -- zkombinovat s EXPLAIN PLAN, vizte dále),
+
+
+
+
+EXPLAIN PLAN  FOR
+SELECT "SPELL"."idSpell" id
+    FROM "SPELL"
+    WHERE "SPELL"."strength" > 50
+    GROUP BY "SPELL"."idSpell";
+
+SELECT PLAN_TABLE_OUTPUT  FROM TABLE(DBMS_XPLAN.DISPLAY());
+
+
+
+CREATE INDEX INDEX_SPELL ON SPELL ("idSpell", "strength");
+
+
+
+EXPLAIN PLAN  FOR
+SELECT "SPELL"."idSpell" id
+    FROM "SPELL"
+    WHERE "SPELL"."strength" > 50
+    GROUP BY "SPELL"."idSpell";
+
+SELECT PLAN_TABLE_OUTPUT  FROM TABLE(DBMS_XPLAN.DISPLAY());
