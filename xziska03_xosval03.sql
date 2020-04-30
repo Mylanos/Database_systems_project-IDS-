@@ -78,7 +78,7 @@ CREATE TABLE "ELEMENT_SPECIALIZATION"
 -- entitnej množine "Dobíjecí místo", ktoré môže byť aj NULL
 CREATE TABLE "CHARGING_PLACE"
 (
-    "idPlace" CHARACTER VARYING(100)
+    "idPlace" NUMBER NOT NULL
         CONSTRAINT "charging_idPlace_PK" PRIMARY KEY,
     "xCoordinate" INTEGER DEFAULT 0,
     "yCoordinate" INTEGER DEFAULT 0,
@@ -220,6 +220,20 @@ CREATE TABLE POSITIVE_SYNERGY(
         CONSTRAINT "POSITIVE_SYNERGY_ID_SPELL_FK" FOREIGN KEY("idElement") REFERENCES "ELEMENT"("idElement") ON DELETE CASCADE
 );
 
+----------------------------------triggers----------------------------------
+
+-- triger pre autoinkrementaciu ID
+DROP SEQUENCE SEQ;
+CREATE SEQUENCE SEQ START WITH 1 INCREMENT BY 1 NOCYCLE;
+
+CREATE OR REPLACE TRIGGER onInsertElement BEFORE
+    INSERT ON CHARGING_PLACE
+    FOR EACH ROW
+BEGIN
+    SELECT SEQ.NEXTVAL INTO :new."idPlace"
+    FROM DUAL;
+END;
+
 ----------------------------------DEMO DATA----------------------------------
 
 insert into ELEMENT ("idElement", "elementName", "colorMagic") values ('elem45703', 'nulla', 'Goldenrod');
@@ -261,11 +275,11 @@ insert into ELEMENT_SPECIALIZATION  ("idSpecialization", "idElement") values ('s
 insert into ELEMENT_SPECIALIZATION  ("idSpecialization", "idElement") values ('spec99567', 'elem55873');
 insert into ELEMENT_SPECIALIZATION  ("idSpecialization", "idElement") values ('spec85181', 'elem06711');
 
-insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place78969', 774, 994, 0.46, 'elem35673');
-insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place91879', 509, 160, 0.25, 'elem70284');
-insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place36930', 223, 437, 0.79, 'elem11780');
-insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place09959', 825, 261, 0.96, 'elem66085');
-insert into CHARGING_PLACE ("idPlace", "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ('place60126', 3, 25, 0.64, 'elem11780');
+insert into CHARGING_PLACE ( "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ( 774, 994, 0.46, 'elem35673');
+insert into CHARGING_PLACE ( "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ( 509, 160, 0.25, 'elem70284');
+insert into CHARGING_PLACE ( "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ( 223, 437, 0.79, 'elem11780');
+insert into CHARGING_PLACE ( "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ( 825, 261, 0.96, 'elem66085');
+insert into CHARGING_PLACE ( "xCoordinate", "yCoordinate", "rateOfSeekage", "idElement") values ( 3, 25, 0.64, 'elem11780');
 
 insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type" , "Age" , "Ability of magic" ) values ('bd41658c-15d4-4a6f-bd8c-330cdfcde63d', 'Whether we like it or not, our arrival has altered the landscape. —Malcolm, navigator of the Belligerent', 'Octinoxate and Oxybenzone', 'ELF', '959', '9821');
 insert into MAGICAL_BEING ("ID_MAGICAL_BEING" , "Story" , "Name" , "Type", "Mana size", "Level") values ('78b2c328-f6d2-434b-a44b-637ae95e4684', 'I can tell you what you wish to know. But first, there is the matter of my fee', 'Malathion', 'MAGICIAN', '06968', '0588');
