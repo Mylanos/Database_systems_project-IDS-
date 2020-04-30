@@ -462,9 +462,12 @@ GRANT ALL ON "SECONDARY_ELEMENTS" TO xosval03;
 GRANT ALL ON "SPECIALIZATION" TO xosval03;
 GRANT ALL ON "SPELL" TO xosval03;
 
+GRANT EXECUTE ON spell_avg_strength TO xosval03;
+GRANT EXECUTE ON get_percentage_of TO xosval03;
 
 
 
+---------------------------------- PROCEDURY ----------------------------------
 -- vytvoření alespoň dvou netriviálních uložených procedur vč. jejich předvedení, ve kterých se musí (dohromady)
 -- vyskytovat alespoň jednou kurzor, ošetření výjimek a použití proměnné s datovým typem odkazujícím se na řádek či
 -- typ sloupce tabulky (table_name.column_name%TYPE nebo table_name%ROWTYPE),
@@ -546,6 +549,7 @@ AS
     END;
 /
 
+-- ukazka procedur
 begin
     SPELL_AVG_STRENGTH('CURSE');
 end;
@@ -558,7 +562,7 @@ end;
 
 
 
-
+---------------------------------- materialized view ----------------------------------
 
 CREATE  MATERIALIZED VIEW SPELLS_WITH_ELEMENTS_td
     CACHE
@@ -590,7 +594,7 @@ GRANT ALL ON SPELLS_WITH_ELEMENTS_td TO xosval03;
 -- zkombinovat s EXPLAIN PLAN, vizte dále),
 
 
-
+---------------------------------- explain plan ----------------------------------
 
 EXPLAIN PLAN  FOR
 SELECT "SPELL"."idSpell" id
