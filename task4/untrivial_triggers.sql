@@ -1,0 +1,3 @@
+-- vytvoření alespoň dvou netriviálních uložených procedur vč. jejich předvedení, ve kterých se musí (dohromady)
+-- vyskytovat alespoň jednou kurzor, ošetření výjimek a použití proměnné s datovým typem odkazujícím se na řádek či
+-- typ sloupce tabulky (table_name.column_name%TYPE nebo table_name%ROWTYPE),
